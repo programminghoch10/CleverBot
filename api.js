@@ -10,6 +10,12 @@ async function query(text) {
     return response
 }
 
+async function queryChat(chat) {
+    let text = chat.pop()
+    return await cleverbot(text, chat)
+}
+
 module.exports = {
     query: query,
+    queryChat: queryChat
 }

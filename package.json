@@ -2,7 +2,8 @@
   "name": "cleverbot",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "type": "module",
+  "exports": "./main.js",
   "scripts": {
     "terminal": "node terminal.js",
     "bot": "node bot.js"
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/programminghoch10/CleverBot#readme",
   "dependencies": {
     "cleverbot-free": "^1.1.7",
+    "lowdb": "^3.0.0",
     "node-telegram-bot-api": "^0.54.0",
     "readline": "^1.3.0"
   }

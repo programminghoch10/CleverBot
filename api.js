@@ -1,4 +1,4 @@
-const cleverbot = require("cleverbot-free")
+import cleverbot from "cleverbot-free"
 
 var history = []
 
@@ -12,10 +12,11 @@ async function query(text) {
 
 async function queryChat(chat) {
     let text = chat.pop()
+    chat = chat.reverse()
     return await cleverbot(text, chat)
 }
 
-module.exports = {
+export default {
     query: query,
     queryChat: queryChat
 }

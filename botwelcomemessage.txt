@@ -1,2 +1,14 @@
 Welcome to unoffical CleverBot on Telegram!
 Just type your messages to chat with CleverBot.
+
+Disclaimer as on cleverbot.com:
+- may not be suitable for children - must be agreed by parent or guardian
+- it learns and imitates, is social content and aims to pass the Turing Test
+- can seem rude or inappropriate - talk with caution and at your own risk
+- the bot pretends to be human - don't give personal info even if it 'asks'
+- cleverbot does not understand you, and cannot mean anything it 'says'
+
+By chatting with this bot you agree that we may process data for or about you
+
+To check if the bot is up, use /ping
+To restart the conversation, use /clear

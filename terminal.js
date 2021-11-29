@@ -1,9 +1,9 @@
-const readline = require("readline")
+import readline from "readline"
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
-const bot = require("./api.js")
+import bot from "./api.js"
 
 function ask(question) {
     return new Promise((resolve, reject) => {

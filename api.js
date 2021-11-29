@@ -12,7 +12,6 @@ async function query(text) {
 
 async function queryChat(chat) {
     let text = chat.pop()
-    chat = chat.reverse()
     return await cleverbot(text, chat)
 }
 

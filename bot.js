@@ -23,7 +23,7 @@ bot.onText(/\/pong/, (msg, match) => {
 
 bot.onText(/^(?![\/]).*$/ig, async (msg, match)  => {
     let id = msg.chat.id
-    let chat = botdb.getChat(id).reverse().map(msg => msg.text)
+    let chat = botdb.getChat(id).map(msg => msg.text)
     chat.push(msg.text)
     let cvbotresponse = await cvbot.queryChat(chat)
     let responsemessage = await bot.sendMessage(msg.chat.id, cvbotresponse)

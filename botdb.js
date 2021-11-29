@@ -19,7 +19,7 @@ function ensureChatExists(id) {
 
 function getChat(id) {
     ensureChatExists(id)
-    return chats[id]
+    return chats[id].sort((a, b) => a.message_id - b.message_id)
 }
 
 async function pushChat(id, usermsg, answer) {

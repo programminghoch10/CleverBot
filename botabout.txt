@@ -1,3 +1,2 @@
 Chat with CleverBot on Telegram.
 read the Disclaimer on https://cleverbot.com/
-Creator: @programminghoch10

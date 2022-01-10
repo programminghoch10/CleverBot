@@ -8,7 +8,11 @@ Disclaimer as on cleverbot.com:
 - the bot pretends to be human - don't give personal info even if it 'asks'
 - cleverbot does not understand you, and cannot mean anything it 'says'
 
-By chatting with this bot you agree that we may process data for or about you
+By chatting with this bot you agree that we may process data for or about you.
+Due to Telegram Bot API limits, we have to save the chat history on our servers seperately.
+You can run /clear to delete all data.
+
+Source code: https://github.com/programminghoch10/CleverBot
 
 To check if the bot is up, use /ping
 To restart the conversation, use /clear

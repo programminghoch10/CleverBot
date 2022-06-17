@@ -39,7 +39,12 @@ async function limitChat(id) {
     await saveDB()
 }
 
-async function clearChat(id) {
+async function clearChat(id, callback) {
+    if (callback != undefined) {
+        chats[id].forEach(message => {
+            callback(message)
+        })
+    }
     delete chats[id]
     await saveDB()
 }

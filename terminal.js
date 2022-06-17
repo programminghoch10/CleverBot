@@ -12,9 +12,16 @@ function ask(question) {
 }
 
 async function main() {
+    console.log("Interactive Terminal mode started.")
+    console.log()
+    console.log("Type nothing to let CleverBot \"think about it\"")
+    console.log("Type \"pass\" to let CleverBot \"think for me\"")
+    console.log("Use \"exit\" to quit.")
+    console.log()
     while (true) {
         let query = await ask("You: ")
         if (query === "exit") break
+        if (query === "pass") query = "[pass]"
         let result = await bot.query(query)
         console.log("CleverBot: " + result)
     }

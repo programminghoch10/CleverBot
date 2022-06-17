@@ -14,30 +14,71 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-bot.onText(/\/ping/, (msg, match) => {
-    bot.sendMessage(msg.chat.id, "/pong")
-})
-bot.onText(/\/pong/, (msg, match) => {
-    bot.sendMessage(msg.chat.id, "/ping")
-})
-
-bot.onText(/^(?![\/]).*$/ig, async (msg, match)  => {
-    let id = msg.chat.id
-    let chat = botdb.getChat(id).map(msg => msg.text)
+async function queryBot(msg) {
+    let chatid = msg.chat.id
+    let chat = botdb.getChat(chatid).map(msg => msg.text)
     chat.push(msg.text)
     let cvbotresponse = await cvbot.queryChat(chat)
     let responsemessage = await bot.sendMessage(msg.chat.id, cvbotresponse)
-    botdb.pushChat(id, msg, responsemessage)
+    botdb.pushChat(chatid, msg, responsemessage)
+}
+
+bot.onText(/^(?![\/]).*$/ig, async (msg, match) => {
+    queryBot(msg)
 })
 
-bot.onText(/\/start/, (msg, match) => {
-    bot.sendMessage(msg.chat.id, welcometext)
+bot.onText(/^\/.*$/, (msg, match) => {
+    const text = msg.text.substring(1)
+    const chatid = msg.chat.id
+    switch (text) {
+        default:
+            notifyUser(chatid, "Unrecognized command!", 5, msg)
+            break
+        case "ping":
+            notifyUser(chatid, "/pong", 30, msg)
+            break
+        case "pong":
+            notifyUser(chatid, "/ping", 30, msg)
+            break
+        case "start":
+            bot.sendMessage(msg.chat.id, welcometext)
+            break
+        case "clear":
+            botdb.clearChat(msg.chat.id)
+            bot.sendMessage(msg.chat.id, cleartext)
+            break
+        case "wipe":
+            botdb.clearChat(msg.chat.id, (msg) => bot.deleteMessage(msg.chat.id, msg.message_id))
+            bot.sendMessage(msg.chat.id, cleartext)
+            break
+        case "thinkaboutit":
+            msg.text = ""
+            queryBot(msg)
+            delayedDeleteMessage(msg, 5)
+            break
+        case "thinkforme":
+        case "pass":
+            msg.text = "[pass]"
+            queryBot(msg)
+            delayedDeleteMessage(msg, 5)
+    }
 })
 
-bot.onText(/\/clear/, (msg, match) => {
-    botdb.clearChat(msg.chat.id)
-    bot.sendMessage(msg.chat.id, cleartext)
-})
+async function notifyUser(chatid, text, timeout = 15, deleteMessage) {
+    bot.sendMessage(chatid, text).then(msg => {
+        setTimeout(() => {
+            bot.deleteMessage(msg.chat.id, msg.message_id)
+            if (deleteMessage != undefined)
+                bot.deleteMessage(deleteMessage.chat.id, deleteMessage.message_id)
+        }, timeout * 1000)
+    })
+}
+
+async function delayedDeleteMessage(msg, timeout) {
+    setTimeout(() => {
+        bot.deleteMessage(msg.chat.id, msg.message_id)
+    }, timeout * 1000)
+}
 
 bot.on('message', (msg) => {
     if (!msg.text) bot.deleteMessage(msg.chat.id, msg.message_id)

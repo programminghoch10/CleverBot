@@ -13,6 +13,3 @@ Due to Telegram Bot API limits, we have to save the chat history on our servers 
 You can run /clear to delete all data.
 
 Source code: https://github.com/programminghoch10/CleverBot
-
-To check if the bot is up, use /ping
-To restart the conversation, use /clear
